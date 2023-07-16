@@ -3,38 +3,38 @@
 
 ## Configuring the gateway
 
-•	Set the server network to the things network using the AT command – AT+PKTFWD= eu1.cloud.thethings.network,1700,1700
-•	Set the frequency band to EU433, that is, AT+CH=EU433
-•	Turn the log on using AT+log= On
+•	Set the server network to the things network using the AT command – AT+PKTFWD= eu1.cloud.thethings.network,1700,1700\\  
+•	Set the frequency band to EU433, that is, AT+CH=EU433\\
+•	Turn the log on using AT+log= On\\
 
 ## Configuring the sensor (LRWAN_NS1)
 
 The sensor or the end-node device was configured using the firmware package from the [St_website](https://www.st.com/en/evaluation-tools/p-nucleo-lrwan3.html#tools-software),I-CUBE-LRWAN. 
-The AT_master project in the firmware package is required for configuring the sensor.
-•	Install Cube IDE from [St_website].
-•	Download and install the latest drivers for the sensor, link 009 or a later version.
-•	Open the AT_master project in the STM32_CUBE_IDE and apply the following changes.
-o	In the file “sys_conf.h” under the includes, enable the DEBUGGER, that is, change DEBUGGER to “1”.
-o	In the file “sys_app.c”, comment out the “DBG_init();” line.
-o	In “master_app.c”, change the frequency band to EU433, that is, change  #define FREQ_BAND  to EU433.
+The AT_master project in the firmware package is required for configuring the sensor.\\
+•	Install Cube IDE from [St_website].\\
+•	Download and install the latest drivers for the sensor, link 009 or a later version.\\
+•	Open the AT_master project in the STM32_CUBE_IDE and apply the following changes.\\
+o	In the file “sys_conf.h” under the includes, enable the DEBUGGER, that is, change DEBUGGER to “1”.\\
+o	In the file “sys_app.c”, comment out the 'DBG_init();' line.\\
+o	In “master_app.c”, change the frequency band to EU433, that is, change ' #define FREQ_BAND  to EU433'.\\
 o	Add the following instruction in the fuction Lora_SetDataRate of the lora_driver.c :  
 
-   ATEerror_t Lora_SetDataRate(uint8_t DataRate)
+   '''ATEerror_t Lora_SetDataRate(uint8_t DataRate)
 {
   ATEerror_t Status;
  int32_t var = DataRate; // Instruction à ajouter
   Status = Modem_AT_Cmd(AT_SET, AT_DR, &var);
         
                return (Status);
-}
+}'''
 
 Note: To enable ADR, you can change the function of the file, lora_driver.c
-        /*to adapt the data rate during transmission*/
+       ''' /*to adapt the data rate during transmission*/
         LoraCmdRetCode = Lora_SetAdaptiveDataRate(ADAPT_DATA_RATE_ENABLE);
-        //LoraCmdRetCode = Lora_SetAdaptiveDataRate(ADAPT_DATA_RATE_DISABLE);
+        //LoraCmdRetCode = Lora_SetAdaptiveDataRate(ADAPT_DATA_RATE_DISABLE);'''
 
-•	Save all changes made and Connect the sensor to your computer, build and run the project from the STM32_CUBE_IDE.
-•	Open your terminal emulation software such as tera_term and view the log.
+•	Save all changes made and Connect the sensor to your computer, build and run the project from the STM32_CUBE_IDE.\\
+•	Open your terminal emulation software such as tera_term and view the log.  
 
 ## Joining TheThingsNetwork
 
@@ -51,6 +51,7 @@ Note: In the Cube IDE, select properties from the project tab, select C/C++ buil
 ## ENABLING SENSORS TO VIEW LIVE DATA
 
 To enable the sensors we had to make changes to the “sys_sensors.c” and “sys_sensors.h” files since the code to enable the sensors on the lrwan_NS1 board was not included. 
+
 In “sys_sensors.h” file, add the following bit of code to include the use of the lrwan_ns1 board; 
 #if defined (USE_LRWAN_NS1)
 #include "lrwan_ns1_humidity.h"
