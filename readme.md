@@ -1,9 +1,10 @@
 
-```# Configuring the P-NUCLEO-LRWAN3
+# Configuring the P-NUCLEO-LRWAN3
 
 ## Configuring the gateway
 
-•	Set the server network to the things network using the AT command – AT+PKTFWD= eu1.cloud.thethings.network,1700,1700\\  
+•	Set the server network to the things network using the AT command – AT+PKTFWD= eu1.cloud.thethings.network,1700,1700  
+- Set the frequency band to EU433, that is, AT+CH=EU433
 •	Set the frequency band to EU433, that is, AT+CH=EU433
 •	Turn the log on using AT+log= On
 
