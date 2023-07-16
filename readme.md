@@ -19,14 +19,14 @@ o	In the file “sys_app.c”, comment out the 'DBG_init();' line.
 o	In “master_app.c”, change the frequency band to EU433, that is, change ' #define FREQ_BAND  to EU433'.  
 o	Add the following instruction in the fuction Lora_SetDataRate of the lora_driver.c :  
 
-   ```ATEerror_t Lora_SetDataRate(uint8_t DataRate)
+   ATEerror_t Lora_SetDataRate(uint8_t DataRate)
 {
   ATEerror_t Status;
  int32_t var = DataRate; // Instruction à ajouter
   Status = Modem_AT_Cmd(AT_SET, AT_DR, &var);
         
                return (Status);
-}```
+}
 
 Note: To enable ADR, you can change the function of the file, lora_driver.c
         /*to adapt the data rate during transmission*/
