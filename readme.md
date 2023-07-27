@@ -33,8 +33,8 @@ o	Add the following instruction in the fuction Lora_SetDataRate of the lora_driv
 
 Note: To enable ADR, you can change the function of the file, lora_driver.c  
        ```c
-        /*to adapt the data rate during transmission*/  
-        LoraCmdRetCode = Lora_SetAdaptiveDataRate(ADAPT_DATA_RATE_ENABLE);
+        /*to adapt the data rate during transmission*/    
+        LoraCmdRetCode = Lora_SetAdaptiveDataRate(ADAPT_DATA_RATE_ENABLE);  
         //LoraCmdRetCode = Lora_SetAdaptiveDataRate(ADAPT_DATA_RATE_DISABLE);
         ```
 
